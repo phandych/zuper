@@ -1,0 +1,8 @@
+<li>
+	<%= product.name %>
+	<%= form_for(@cart_item) do |f| %>
+		<%= hidden_field_tag :product_id, product.id %>
+		<%= f.hidden_field :quantity, value: 1 %>
+		<%= f.submit "Add to Cart" %>
+	<% end %>
+</li>
