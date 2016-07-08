@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   root 'products#index'
   post '/' => 'cart_items#create'
-  resources :cart_items
+  resources :cart_items do
+    collection do
+      put :update_cart
+    end
+  end
   resources :shopping_carts
   resource :cart, only: [:show]
 

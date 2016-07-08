@@ -1,10 +1,12 @@
-<% @carts.each do |cart| %>
+<%= fields_for "cart_item[]", cart_item do |f| %>
 	<tr>
 
-		<th><%= cart.product.name %></th>
-		<th><%= cart.quantity %>
-		<th><%= number_to_currency cart.unit_price %></th>
-		<th><%= number_to_currency cart.row_subtotal %></th>
-		
+		<th><%= product.name %></th>
+			<th><%= f.number_field :quantity, value: cart_item.quantity.to_i %>
+			<th><%= number_to_currency cart_item.unit_price %></th>
+			<th><%= number_to_currency cart_item.row_subtotal %></th>
+			<%= hidden_field_tag :product_id, product.id %>
+			
+	
 	</tr> 
 <% end %>

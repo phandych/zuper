@@ -1,6 +1,10 @@
 class ProductsController < ApplicationController
   def index
   	@products = Product.all
-  	@cart_item = current_cart.cart_items.new
+  	if user_signed_in?
+  		@cart_item = current_user.cart_items.new
+  	else
+  		@cart_item = CartItem.new
+  	end
   end
 end

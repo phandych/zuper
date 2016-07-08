@@ -1,0 +1,2 @@
+<li id="cart_count"><%= link_to "#{current_user.cart_items.sum(:quantity)} Item #{number_to_currency current_user.cart_items.sum(:row_subtotal)}", cart_path %></li>   
+<strong id="cart-text"> <%= current_user.cart_items.count %></strong>

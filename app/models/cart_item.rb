@@ -1,12 +1,13 @@
 class CartItem < ActiveRecord::Base
-
+  belongs_to :user
   belongs_to :product
   belongs_to :shopping_cart
   before_save :calculate
+
+  default_scope -> {order(id: :desc)}
   
   validates :quantity, numericality: true
   
-
 
 
   def increment
