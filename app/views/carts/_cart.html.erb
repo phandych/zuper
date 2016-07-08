@@ -1,0 +1,10 @@
+<% @carts.each do |cart| %>
+	<tr>
+
+		<th><%= cart.product.name %></th>
+		<th><%= cart.quantity %>
+		<th><%= number_to_currency cart.unit_price %></th>
+		<th><%= number_to_currency cart.row_subtotal %></th>
+		
+	</tr> 
+<% end %>

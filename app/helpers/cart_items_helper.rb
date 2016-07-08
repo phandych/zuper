@@ -1,13 +1,9 @@
 module CartItemsHelper
-	def carted(cart)
-		session[:shopping_cart_id] = cart.id
-	end
-
 	def current_cart
-		if session[:shopping_cart_id]
-			ShoppingCart.find(session[:shopping_cart_id])
-		else
+		if session[:shopping_cart_id].nil?
 			ShoppingCart.new
+		else
+			ShoppingCart.find(session[:shopping_cart_id])
 		end
 	end
 end
