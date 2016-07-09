@@ -1,18 +1,21 @@
 class ShoppingCart < ActiveRecord::Base
 	has_many :cart_items, dependent: :destroy
 	has_many :products, through: :cart_items
-	before_update :update_subtotal
+	belongs_to :user
+	before_save :update_subtotal
 
 	def subtotal
-		cart_items.collect { |ci| ci.valid? ? (ci.quantity * ci.unit_price) : 0 }.sum
-	end
+   		cart_items.collect { |ci| ci.valid? ? (ci.quantity * ci.unit_price) : 0 }.sum
+  	end
 
-	private
+  	def number
+      id ? id.to_s.rjust(6, '0') : nil
+    end
+private
 
-		def update_subtotal
-			self.subtotal = subtotal
-			save
-		end
+  def update_subtotal
+    self[:subtotal] = subtotal
+  end
 
 	
 

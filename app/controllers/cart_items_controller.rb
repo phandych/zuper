@@ -2,17 +2,17 @@ class CartItemsController < ApplicationController
 	before_action :authenticate_user!
 
 	def create
+		@cart = current_cart
 		@product = Product.find(params[:product_id])
-		if  existing = current_user.cart_items.where(product_id: @product.id).first
-			existing.increment
+		if  @cart_item = @cart.cart_items.where(product_id: @product.id).first
+			@cart_item.increment
 		else
-			@cart_item = current_user.cart_items.new(product_id: @product.id, quantity: 1)
-			@cart_item.save
+			@cart_item = @cart.cart_items.new(cart_params)
+			@cart.user_id = current_user.id
 		end
-		respond_to do |format|
-			format.html { redirect_to root_url }
-			format.js
-		end
+		@cart_item.save
+		@cart.save
+		redirect_to root_url
 	end
 
 	# def update
@@ -31,7 +31,7 @@ class CartItemsController < ApplicationController
 	private
 
 		def cart_params
-			params.require(:cart_item).permit(:quantity)
+			params.require(:cart_item).permit(:quantity, :product_id)
 		end
 
 end

@@ -1,4 +1,4 @@
-<h2>Shopping Cart</h2>
+<h2>Shopping Cart</h2> <%= @shopping_cart %>
 
 <%= form_for :cart_item, url: { action: "update_cart", controller: "cart_items"}, method: :put do %>
 <table class="table table-bordered"> 
@@ -22,13 +22,13 @@
 		<table class="table table-hover"> 
 			<tbody> 
 				<tr> 
-					<th scope="row">Subtotal</th> <td><%= number_to_currency current_user.cart_items.sum(:row_subtotal) %></td> 
+					<th scope="row">Subtotal</th> <td><%= number_to_currency current_cart.cart_items.sum(:row_subtotal) %></td> 
 				</tr> 
 				<tr> 
 					<th scope="row">Shipping</th> <td>Gratis</td>
 				</tr> 
 				<tr> 
-					<th scope="row">Subtotal</th> <td><%= number_to_currency current_user.cart_items.sum(:row_subtotal) %></td> 
+					<th scope="row">Subtotal</th> <td><%= number_to_currency current_cart.cart_items.sum(:row_subtotal) %></td> 
 				</tr> 
 			</tbody> 
 		</table>
